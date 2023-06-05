@@ -1,0 +1,9 @@
+-- `user`
+create table if not exists `user`
+(
+`userid` varchar(256) not null auto_increment comment '用户id' primary key,
+`username` varchar(256) not null comment '用户名',
+`userpassword` varchar(256) not null comment '用户密码'
+) comment '`user`';
+
+

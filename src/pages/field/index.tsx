@@ -1,30 +1,22 @@
 import React, { useState } from 'react'
-import { useNavigate } from '@umijs/max'
-import { Col, Radio, RadioChangeEvent, Row, message } from 'antd'
-import { listMyAddTableInfoByPage } from '@/services/tableInfoService'
 import { PageContainer } from '@ant-design/pro-layout'
-import TableInfoCard from '@/components/TableInfoCard'
+import { Col, Radio, RadioChangeEvent, Row, message } from 'antd'
+import FieldInfoCard from '@/components/FieldInfoCard'
+import { listMyAddFieldInfoByPage } from '@/services/fieldInfoService'
+
 /**
- * 表信息页
+ * 字段信息页
  * @constructor
  */
-const TableInfoPage: React.FC = () => {
+const Field: React.FC = () => {
   const [layout, setLayout] = useState('half')
 
-  const navigate = useNavigate()
-
-  /**
-   * 加载我的数据
-   * @param searchParams 
-   * @param setDataList 
-   * @param setTotal 
-   */
   const loadMyData = (
-    searchParams: TableInfoType.TableInfoQueryRequest,
-    setDataList: (dataList: TableInfoType.TableInfo[]) => void,
+    searchParams: FieldInfoType.FieldInfoQueryRequest,
+    setDataList: (dataList: FieldInfoType.FieldInfo[]) => void,
     setTotal: (total: number) => void
   ) => {
-    listMyAddTableInfoByPage(searchParams)
+    listMyAddFieldInfoByPage(searchParams)
       .then(res => {
         setDataList(res.data.records)
         setTotal(res.data.total)
@@ -34,22 +26,16 @@ const TableInfoPage: React.FC = () => {
       })
   }
 
-  // 导入表，跳转到主页
-  const doImport = (tableInfo: TableInfoType.TableInfo) => {
-    navigate(`/?table_id=${tableInfo.id}`)
-  }
-
-  // 更改布局
   const onLayoutChange = (e: RadioChangeEvent) => {
     setLayout(e.target.value)
   }
 
   return (
-    <div className='table-info'>
+    <div className='field-info'>
       <PageContainer
         title={
           <>
-            站在巨人的肩膀上，一键导入表并生成模拟数据！
+            参考或学习字段设计，高效完成建表！
           </>
         }
         extra={
@@ -69,23 +55,14 @@ const TableInfoPage: React.FC = () => {
             xl={layout === 'half' ? 12 : 24}
             order={layout === 'output' ? 2 : 1}
           >
-            <TableInfoCard
-              title='公开表信息'
-              showTag={false}
-              onImport={doImport}
-            />
+            <FieldInfoCard title='公开字段信息' showTag={false} />
           </Col>
           <Col
             xs={24}
             xl={layout === 'half' ? 12 : 24}
             order={layout === 'output' ? 1 : 2}
           >
-            <TableInfoCard
-              title='个人表'
-              onImport={doImport}
-              onLoad={loadMyData}
-              needLogin
-            />
+            <FieldInfoCard title="个人字段" onLoad={loadMyData} needLogin />
           </Col>
         </Row>
       </PageContainer>
@@ -93,4 +70,4 @@ const TableInfoPage: React.FC = () => {
   )
 }
 
-export default TableInfoPage
+export default Field
