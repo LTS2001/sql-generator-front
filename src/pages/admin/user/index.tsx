@@ -47,52 +47,72 @@ const AdminUserPage: React.FC<unknown> = () => {
       title: 'id',
       dataIndex: 'id',
       valueType: 'index',
+      width: 50,
+      align: 'center'
     },
     {
       title: '用户昵称',
       dataIndex: 'userName',
       valueType: 'text',
+      width: 100,
+      align: 'center'
     },
     {
       title: '账号',
       dataIndex: 'userAccount',
       valueType: 'text',
+      width: 180,
+      align: 'center'
     },
     {
       title: '用户头像',
       dataIndex: 'userAvatar',
       valueType: 'image',
+      align: 'center'
     },
     {
       title: '性别',
       dataIndex: 'gender',
-      hideInForm: true,
       valueEnum: {
         0: { text: '男' },
         1: { text: '女' },
       },
+      width: 80,
+      align: 'center'
     },
     {
       title: '用户角色',
       dataIndex: 'userRole',
       valueType: 'text',
+      valueEnum: {
+        'user': { text: '用户' },
+        'admin': { text: '管理员' },
+      },
+      width: 100,
+      align: 'center'
     },
     {
       title: '创建时间',
       dataIndex: 'createTime',
       valueType: 'dateTime',
       hideInForm: true,
+      width: 180,
+      align: 'center'
     },
     {
       title: '更新时间',
       dataIndex: 'updateTime',
       valueType: 'dateTime',
       hideInForm: true,
+      width: 180,
+      align: 'center'
     },
     {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
+      width: 180,
+      align: 'center',
       render: (_, record) => (
         <Space split={<Divider type="vertical" />}>
           <Typography.Link
@@ -152,14 +172,14 @@ const AdminUserPage: React.FC<unknown> = () => {
       <CreateModal
         modalVisible={createModalVisible}
         columns={columns}
-        onSubmit={() => {}}
+        onSubmit={() => { setCreateModalVisible(false) }}
         onCancel={() => setCreateModalVisible(false)}
       />
       <UpdateModal
         oldData={updateData}
         modalVisible={updateModalVisible}
         columns={columns}
-        onSubmit={() => {}}
+        onSubmit={() => { setUpdateModalVisible(false) }}
         onCancel={() => setUpdateModalVisible(false)}
       />
     </PageContainer>

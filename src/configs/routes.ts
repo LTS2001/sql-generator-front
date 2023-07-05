@@ -82,11 +82,6 @@ export default [
         path: '/admin/field',
         component: 'admin/field',
       },
-      {
-        name: '举报管理',
-        path: '/admin/report',
-        component: 'admin/report',
-      },
     ],
   },
 ];

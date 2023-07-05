@@ -92,16 +92,6 @@ const FormInput: React.FC<Props> = forwardRef((props, ref) => {
   /**
    * 字段类型选项
    */
-  const fieldTypeOptions = FIELD_TYPE_LIST.map((field) => {
-    return {
-      label: field,
-      value: field
-    }
-  })
-
-  /**
-   * 字段类型选项
-   */
   const onUpdateOptions = ON_UPDATE_LIST.map((field) => {
     return {
       label: field,
@@ -220,12 +210,13 @@ const FormInput: React.FC<Props> = forwardRef((props, ref) => {
                         name={[field.name, 'fieldType']}
                         rules={[{ required: true }]}
                       >
-                        <AutoComplete
-                          style={{ width: 120 }}
-                          placeholder='请输入'
-                          options={fieldTypeOptions}
-                          filterOption={filterOption}
-                        />
+                        <Select style={{ width: 120 }}>
+                          {FIELD_TYPE_LIST.map((item) => (
+                            <Option key={item} value={item}>
+                              {item}
+                            </Option>
+                          ))}
+                        </Select>
                       </Form.Item>
                       <Form.Item
                         label='默认值'
@@ -332,7 +323,7 @@ const FormInput: React.FC<Props> = forwardRef((props, ref) => {
                                 name={[field.name, 'mockParams']}
                                 rules={[{ required: true }]}
                               >
-                                <InputNumber />
+                                <Input placeholder='请输入起始的数值' />
                               </Form.Item>
                             )
                           }
@@ -366,7 +357,7 @@ const FormInput: React.FC<Props> = forwardRef((props, ref) => {
                                   )}
                                 >
                                   {dictList.map(item => (
-                                    <Option key={item.id} value={item.id}>
+                                    <Option key={item.id} value={item.content}>
                                       {item.name}
                                     </Option>
                                   ))}

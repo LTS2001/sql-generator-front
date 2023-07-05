@@ -53,7 +53,11 @@ const CreateModal: React.FC<PropsWithChildren<CreateModalProps>> = (props) => {
         }}
         rowKey="id"
         type="form"
-        columns={columns}
+        columns={[...columns, {
+          title: '用户密码',
+          dataIndex: 'userPassword',
+          valueType: 'password',
+        }]}
       />
     </Modal>
   );

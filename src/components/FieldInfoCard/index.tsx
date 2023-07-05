@@ -18,7 +18,7 @@ interface Props {
     setDataList: (dataList: FieldInfoType.FieldInfo[]) => void,
     setTotal: (total: number) => void
   ) => void,
-  onImport?: (values: FieldInfoType.FieldInfo) => void
+  onImport?: (values: FieldInfoType.FieldInfo) => void,
 }
 
 /**
@@ -36,7 +36,7 @@ const FieldInfoCard: React.FC<Props> = (props) => {
     current: 1,
     pageSize: DEFAULT_PAGE_SIZE,
     sortField: 'createTime',
-    sortOrder: 'descend'
+    sortOrder: 'DESC'
   }
   const [searchParams, setSearchParams] = useState<FieldInfoType.FieldInfoQueryRequest>(initSearchParams)
   const { initialState } = useModel('@@initialState')
@@ -90,13 +90,14 @@ const FieldInfoCard: React.FC<Props> = (props) => {
                 onSearch={(value) => {
                   setSearchParams({
                     ...initSearchParams,
-                    searchName: value
+                    name: value
                   })
                 }}
               />
             </Space>
             <FieldInfoList
               dataList={dataList}
+              setDataList={setDataList}
               loading={loading}
               showTag={showTag}
               onImport={onImport}

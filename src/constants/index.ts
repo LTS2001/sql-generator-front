@@ -1,4 +1,4 @@
-export const DEFAULT_NAME = 'SQLGenerator'
+export const DEFAULT_NAME = 'SQLGenerator';
 
 /**
  * 字段类型列表
@@ -18,7 +18,7 @@ export const FIELD_TYPE_LIST = [
   'datetime',
   'timestamp',
   'char',
-  'varchar',
+  'varchar(256)',
   'tinytext',
   'text',
   'mediumtext',
@@ -26,15 +26,12 @@ export const FIELD_TYPE_LIST = [
   'tinyblob',
   'blob',
   'mediumblob',
-  'longblob',
-  'binary',
-  'varbinary',
-]
+];
 
 /**
  * onUpdate 值列表
  */
-export const ON_UPDATE_LIST = ['CURRENT_TIMESTAMP']
+export const ON_UPDATE_LIST = ['CURRENT_TIMESTAMP'];
 
 /**
  * 默认添加的字段信息
@@ -49,7 +46,7 @@ export const DEFAULT_ADD_FIELD: Field = {
   notNull: true,
   primaryKey: false,
   autoIncrement: false,
-}
+};
 
 /**
  * 通用字段列表
@@ -96,30 +93,38 @@ export const COMMON_FIELD_LIST: Field[] = [
     primaryKey: false,
     autoIncrement: false,
   },
-]
+];
 
 /**
  * 模拟类型列表
  */
-export const MOCK_TYPE_LIST = ['固定', '随机', '递增', '规则', '词库', '不模拟'];
+export const MOCK_TYPE_LIST = [
+  '固定',
+  '随机',
+  '递增',
+  '规则',
+  '词库',
+  '不模拟',
+];
 
 /**
  * 模拟参数随机生成类型列表
  */
 export const MOCK_PARAMS_RANDOM_TYPE_LIST = [
-  '字符串',
+  '人名',
+  '城市',
+  '邮箱',
+  'URL',
+  'IPV4',
   '整数',
   '小数',
   '日期',
-  '时间戳',
-  '网址',
-  'IP',
-  '邮箱',
   '手机号',
-  '人名',
-  '城市',
-  '大学',
-]
+  '字符串',
+  '车辆',
+  '鱼',
+  '昆虫',
+];
 
 /**
  * 审核状态枚举
@@ -134,4 +139,4 @@ export const REVIEW_STATUS_ENUM = {
   2: {
     text: '拒绝',
   },
-}
+};

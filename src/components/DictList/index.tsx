@@ -3,21 +3,19 @@ import { Button, Divider, Drawer, List, Popconfirm, Space, Tag, Typography, mess
 import { PaginationConfig } from 'antd/es/pagination'
 import React, { useState } from 'react'
 import { deleteDict, generateCreateDictTableSql } from '@/services/dictService'
-import ReportModal from '../ReportModal'
 import GenerateResultCard from '../GenerateResultCard'
 
 interface Props {
   pagination: PaginationConfig
   loading?: boolean
   dataList: DictType.Dict[]
+  setDataList: (dataList: DictType.Dict[]) => void,
   showTag?: boolean
   onImport?: (values: DictType.Dict) => void
 }
 
 const DictList: React.FC<Props> = (props) => {
-  const { pagination, dataList, loading, showTag = true } = props
-  const [reportModalVisible, setReportModalVisible] = useState(false)
-  const [reportedId, setReportedId] = useState(0)
+  const { pagination, dataList, setDataList, loading, showTag = true } = props
   const [result, setResult] = useState<GenerateVO>()
   const [genLoading, setGenLoading] = useState(false)
   const { initialState } = useModel('@@initialState')
@@ -63,14 +61,15 @@ const DictList: React.FC<Props> = (props) => {
                   ellipsis={{
                     rows: 6,
                     expandable: true,
-                    symbol: '展开'
+                    symbol: '展开',
                   }}
                   copyable
                 >
-                  {JSON.parse(item.content).join(',')}
+                  {JSON.parse(item.content).join('，')}
                 </Typography.Paragraph>
               }
             />
+            {/* 每个词库列表中的 时间 | 生成表 | 删除 */}
             <Space split={<Divider type='vertical' />} style={{ fontSize: 14 }}>
               <Typography.Text type='secondary'>
                 {item.createTime.toString().split('T')[0]}
@@ -85,27 +84,21 @@ const DictList: React.FC<Props> = (props) => {
                       setResult(res.data)
                     })
                     .catch(e => {
-                      message.error('复制失败，' + e.message)
+                      message.error('生成表失败，' + e.message)
                     })
                     .finally(() => setGenLoading(false))
                 }}
               >
                 生成表
               </Button>
-              <Button
-                type='text'
-                onClick={() => {
-                  setReportedId(item.id)
-                  setReportModalVisible(true)
-                }}
-              >
-                举报
-              </Button>
-              {loginUser && loginUser.id === item.userId && (
+              {loginUser && loginUser.id === item.userId && showTag && (
                 <Popconfirm
                   title='你确定要删除吗？'
                   onConfirm={() => {
                     doDelete(item.id)
+                    const copyDataList = JSON.parse(JSON.stringify(dataList));
+                    copyDataList.splice(index, 1)
+                    setDataList(copyDataList)
                   }}
                 >
                   <Button type='text' danger>
@@ -116,13 +109,6 @@ const DictList: React.FC<Props> = (props) => {
             </Space>
           </List.Item>
         )}
-      />
-      <ReportModal
-        visible={reportModalVisible}
-        reportedId={reportedId}
-        onClose={() => {
-          setReportModalVisible(false)
-        }}
       />
       <Drawer
         title='生成字典表成功'

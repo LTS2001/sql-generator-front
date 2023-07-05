@@ -2,13 +2,10 @@ import React from 'react'
 import { history } from '@umijs/max'
 import { useModel } from '@umijs/max'
 import { stringify } from 'querystring'
-// import classNames from 'classnames'
 
 import { Link } from '@@/exports'
 import { LoginOutlined } from '@ant-design/icons'
 import { Avatar, Button, Dropdown, Menu, message } from 'antd'
-
-import { userLogout } from '@/services/userService'
 
 import styles from './index.less'
 /**
@@ -26,12 +23,8 @@ const AvatarDropdown: React.FC = () => {
     const { key } = event
 
     if (key === 'logout') {
-      try {
-        await userLogout()
-        message.success('已退出登录')
-      } catch (error) {
-        message.error('退出失败')
-      }
+      window.localStorage.removeItem('SQLGenerator');
+      message.success('退出成功')
       await setInitialState({ ...initialState, loginUser: undefined })
       history.replace({
         pathname: '/user/login',
@@ -53,7 +46,7 @@ const AvatarDropdown: React.FC = () => {
       </Menu.Item>
       <Menu.Item key='logout'>
         <span style={{ color: 'red' }}>
-          <LoginOutlined />
+          <LoginOutlined />退出登录
         </span>
       </Menu.Item>
     </Menu>
@@ -61,7 +54,6 @@ const AvatarDropdown: React.FC = () => {
 
   return loginUser ? (
     <Dropdown
-      // overlayClassName={classNames(styles.container)}
       overlay={menuHeaderDropdown}
     >
       <div className={`${styles.action} ${styles.account}`}>

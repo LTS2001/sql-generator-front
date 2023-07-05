@@ -24,12 +24,13 @@ const GenerateResultCard: React.FC<Props> = (props) => {
   const doDownloadDataExcel = async () => {
     if (!result) return
     try {
+      // 后端传递一个 buffer 二进制流
       const res = await downloadDataExcel(result)
-      // 下载文件
+      // 处理 buffer 二进制流
       const blob = new Blob([res])
       const objectURL = URL.createObjectURL(blob)
       const btn = document.createElement('a')
-      btn.download = `${result.tableSchema.tableName}表数据.xlsx`
+      btn.download = `${result.tableSchema.tableName}表模拟数据.xlsx`
       btn.href = objectURL
       btn.click()
       URL.revokeObjectURL(objectURL)
@@ -65,55 +66,55 @@ const GenerateResultCard: React.FC<Props> = (props) => {
                 <Button icon={<CopyOutlined />} type='primary'
                   onClick={e => {
                     if (!result) return
-                    copy(`${result.createSql}\n\n${result.insertSql}`)
+                    copy(`${result.buildTableSql}\n\n${result.insertSql}`)
                     e.stopPropagation()
                     message.success('已复制到剪贴板')
                   }}
                 >
                   复制全部
                 </Button>
-                <div style={{ marginTop: 16 }}></div>
-                <Collapse defaultActiveKey={['1', '2']}>
-                  <Collapse.Panel
-                    header='建表语句'
-                    key={1}
-                    className='code-collapse-panel'
-                    extra={
-                      <Button size='small' icon={<CopyOutlined />}
-                        onClick={(e) => {
-                          copy(result?.createSql)
-                          e.stopPropagation()
-                          message.success('已复制到剪切板')
-                        }}
-                      >
-                        复制
-                      </Button>
-                    }
-                  >
-                    <CodeEditor value={result.createSql} language='sql' />
-                  </Collapse.Panel>
-                  <Collapse.Panel
-                    header='插入语句'
-                    key='2'
-                    className='code-collapse-panel'
-                    extra={
-                      <Button
-                        size='small'
-                        icon={<CopyOutlined />}
-                        onClick={(e) => {
-                          copy(result?.insertSql)
-                          e.stopPropagation()
-                          message.success('已复制到剪切板')
-                        }}
-                      >
-                        复制
-                      </Button>
-                    }
-                  >
-                    <CodeEditor value={result.insertSql} language='sql' />
-                  </Collapse.Panel>
-                </Collapse>
               </Space>
+              <div style={{ marginTop: 16 }}></div>
+              <Collapse defaultActiveKey={['1', '2']}>
+                <Collapse.Panel
+                  header='建表语句'
+                  key={1}
+                  className='code-collapse-panel'
+                  extra={
+                    <Button size='small' icon={<CopyOutlined />}
+                      onClick={(e) => {
+                        copy(result?.buildTableSql)
+                        e.stopPropagation()
+                        message.success('已复制到剪切板')
+                      }}
+                    >
+                      复制
+                    </Button>
+                  }
+                >
+                  <CodeEditor value={result.buildTableSql} language='sql' />
+                </Collapse.Panel>
+                <Collapse.Panel
+                  header='插入语句'
+                  key='2'
+                  className='code-collapse-panel'
+                  extra={
+                    <Button
+                      size='small'
+                      icon={<CopyOutlined />}
+                      onClick={(e) => {
+                        copy(result?.insertSql)
+                        e.stopPropagation()
+                        message.success('已复制到剪切板')
+                      }}
+                    >
+                      复制
+                    </Button>
+                  }
+                >
+                  <CodeEditor value={result.insertSql} language='sql' />
+                </Collapse.Panel>
+              </Collapse>
             </>
           )
         },

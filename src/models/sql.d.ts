@@ -30,7 +30,7 @@ interface Field {
  */
 interface GenerateVO {
   tableSchema: TableSchema
-  createSql: string
+  buildTableSql: string
   insertSql: string
   dataJson: string
   // Record后面的泛型就是对象键和值的类型，其作用就是定义一个键为string值为any的对象

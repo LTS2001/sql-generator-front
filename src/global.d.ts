@@ -15,7 +15,7 @@ interface PageRequest {
   current?: number
   pageSize?: number
   sortField?: string
-  sortOrder?: 'ascend' | 'descend'
+  sortOrder?: 'ASC' | 'DESC'
 }
 
 /**

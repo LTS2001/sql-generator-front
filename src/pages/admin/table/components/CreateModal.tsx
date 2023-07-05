@@ -21,9 +21,9 @@ const handleAdd = async (fields: TableInfoType.TableInfo) => {
     hide();
     message.success('添加成功');
     return true;
-  } catch (error) {
+  } catch (error: any) {
     hide();
-    message.error('添加失败请重试！');
+    message.error(error.message);
     return false;
   }
 };

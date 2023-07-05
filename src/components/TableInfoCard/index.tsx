@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useModel } from '@umijs/max'
 import { Button, Card, Empty, Input, Space, message } from 'antd'
 import TableInfoList from '../TableInfoList'
-import { listFieldInfoByPage } from '@/services/fieldInfoService'
+import { listTableInfoByPage } from '@/services/tableInfoService'
 
 // 默认分页大小
 const DEFAULT_PAGE_SIZE = 10
@@ -40,7 +40,7 @@ const TableInfoCard: React.FC<Props> = (props) => {
     current: 1,
     pageSize: DEFAULT_PAGE_SIZE,
     sortField: 'createTime',
-    sortOrder: 'descend'
+    sortOrder: 'DESC'
   }
   const [searchParams, setSearchParams] =
     useState<TableInfoType.TableInfoQueryRequest>(initSearchParams)
@@ -52,7 +52,7 @@ const TableInfoCard: React.FC<Props> = (props) => {
    * 加载数据
    */
   const innerOnLoad = () => {
-    listFieldInfoByPage({
+    listTableInfoByPage({
       ...searchParams,
       // 只展示已审核通过的
       reviewStatus: 1
@@ -117,6 +117,7 @@ const TableInfoCard: React.FC<Props> = (props) => {
               }}
               showTag={showTag}
               dataList={dataList}
+              setDataList={setDataList}
               loading={loading}
               onImport={onImport}
             />

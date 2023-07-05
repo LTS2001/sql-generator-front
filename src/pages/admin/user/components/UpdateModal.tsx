@@ -52,7 +52,11 @@ const UpdateModal: React.FC<PropsWithChildren<UpdateModalProps>> = (props) => {
       <ProTable<UserType.User, UserType.User>
         rowKey="id"
         type="form"
-        columns={columns}
+        columns={[...columns, {
+          title: '更改后的密码',
+          dataIndex: 'userPassword',
+          valueType: 'password'
+        }]}
         form={{
           initialValues: oldData,
         }}

@@ -10,7 +10,6 @@ import { userLogin } from '@/services/userService'
  */
 export default () => {
   const [searchParams] = useSearchParams()
-
   const { initialState, setInitialState } = useModel('@@initialState')
 
   const doUserLogin = async (fields: UserType.UserLoginRequest) => {
@@ -22,7 +21,7 @@ export default () => {
         ...initialState,
         loginUser: res.data
       })
-      // 重定向到之前的页面
+      // 重定向到之前的页面（?? 类似于 ||，?? 只有当左侧为 null 或者 undefined 时才能走右边）
       window.location.href = searchParams.get('redirect') ?? '/'
     } catch (error: any) {
       message.error(error.message)

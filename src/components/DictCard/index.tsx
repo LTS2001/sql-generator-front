@@ -6,7 +6,7 @@ import { listDictByPage } from '@/services/dictService'
 import { Link } from '@umijs/max'
 import DictList from '../DictList'
 
-const DEFAULT_PAGE_SIZE = 10
+const DEFAULT_PAGE_SIZE = 5
 
 interface Props {
   title?: string
@@ -29,8 +29,8 @@ const DictCard: React.FC<Props> = (props) => {
   const initSearchParams: DictType.DictQueryRequest = {
     current: 1,
     pageSize: DEFAULT_PAGE_SIZE,
-    sortField: 'currentTime',
-    sortOrder: 'descend'
+    sortField: 'createTime',
+    sortOrder: 'ASC'
   }
   const [searchParams, setSearchParams] = useState<DictType.DictQueryRequest>(initSearchParams)
 
@@ -68,7 +68,7 @@ const DictCard: React.FC<Props> = (props) => {
       <Card
         title={title}
         extra={
-          <Link to='/'>
+          <Link to='/dict/add'>
             <Button type='primary'>创建词库</Button>
           </Link>
         }
@@ -87,6 +87,7 @@ const DictCard: React.FC<Props> = (props) => {
                 }}
               />
             </Space>
+            {/* 单词展示列表 */}
             <DictList
               pagination={{
                 total,
@@ -94,12 +95,13 @@ const DictCard: React.FC<Props> = (props) => {
                   setSearchParams({ ...searchParams, current })
                   window.scrollTo({ top: 0 })
                 },
-                pageSize: DEFAULT_PAGE_SIZE
+                pageSize: DEFAULT_PAGE_SIZE,
               }}
               dataList={dataList}
               loading={loading}
               showTag={showTag}
               onImport={onImport}
+              setDataList={setDataList}
             />
           </>
         ) : (

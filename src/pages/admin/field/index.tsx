@@ -69,31 +69,42 @@ const AdminFieldPage: React.FC = () => {
     {
       title: 'id',
       dataIndex: 'id',
-      valueType: 'index'
+      valueType: 'index',
+      width: 50,
+      align: 'center'
     },
     {
       title: '名称',
-      dataIndex: 'name'
+      dataIndex: 'name',
+      width: 100,
+      align: 'center'
     },
     {
       title: '内容',
       dataIndex: 'content',
-      valueType: 'textarea'
+      valueType: 'textarea',
+      ellipsis: true,
     },
     {
       title: '审核状态',
       dataIndex: 'reviewStatus',
-      valueEnum: REVIEW_STATUS_ENUM
+      valueEnum: REVIEW_STATUS_ENUM,
+      width: 80,
+      align: 'center'
     },
     {
       title: '审核信息',
-      dataIndex: 'reviewMessage'
+      dataIndex: 'reviewMessage',
+      width: 200,
+      align: 'center'
     },
     {
       title: '创建者',
       dataIndex: 'userId',
       valueType: 'text',
-      hideInForm: true
+      hideInForm: true,
+      width: 80,
+      align: 'center'
     },
     {
       title: '创建时间',
@@ -101,12 +112,16 @@ const AdminFieldPage: React.FC = () => {
       valueType: 'dateTime',
       sorter: true,
       hideInForm: true,
-      hideInSearch: true
+      hideInSearch: true,
+      width: 150,
+      align: 'center'
     },
     {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
+      width: 230,
+      align: 'center',
       render: (_, record) => (
         <Space split={<Divider type='vertical' />}>
           <Typography.Link
@@ -188,14 +203,14 @@ const AdminFieldPage: React.FC = () => {
       <CreateModal
         modalVisible={createModalVisible}
         columns={columns}
-        onSubmit={() => { }}
+        onSubmit={() => { setCreateModalVisible(false); actionRef.current?.reload(); }}
         onCancel={() => setCreateModalVisible(false)}
       />
       <UpdateModal
         modalVisible={updateModalVisible}
         oldData={updateData}
         columns={columns}
-        onSubmit={() => { }}
+        onSubmit={() => { setUpdateModalVisible(false); actionRef.current?.reload(); }}
         onCancel={() => setUpdateModalVisible(false)}
       />
     </PageContainer>

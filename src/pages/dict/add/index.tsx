@@ -66,8 +66,8 @@ const DictAddPage: React.FC = () => {
     <PageContainer title='创建词库'>
       <ProForm<DictType.DictAddRequest>
         form={form}
-        onFinish={async (values) => {
-          doAdd(values)
+        onFinish={async ({ name, content }) => {
+          doAdd({ name, content })
         }}
         labelAlign='left'
         submitter={{

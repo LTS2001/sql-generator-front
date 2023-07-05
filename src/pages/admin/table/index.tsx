@@ -81,30 +81,41 @@ const AdminTableInfoPage: React.FC<unknown> = () => {
       title: 'id',
       dataIndex: 'id',
       valueType: 'index',
+      width: 50,
+      align: 'center'
     },
     {
       title: '名称',
       dataIndex: 'name',
+      width: 120,
+      align: 'center'
     },
     {
       title: '内容',
       dataIndex: 'content',
       valueType: 'textarea',
+      ellipsis: true,
     },
     {
       title: '审核状态',
       dataIndex: 'reviewStatus',
       valueEnum: REVIEW_STATUS_ENUM,
+      width: 80,
+      align: 'center'
     },
     {
       title: '审核信息',
       dataIndex: 'reviewMessage',
+      width: 200,
+      align: 'center'
     },
     {
       title: '创建者',
       dataIndex: 'userId',
       valueType: 'text',
       hideInForm: true,
+      width: 80,
+      align: 'center'
     },
     {
       title: '创建时间',
@@ -113,11 +124,15 @@ const AdminTableInfoPage: React.FC<unknown> = () => {
       sorter: true,
       hideInForm: true,
       hideInSearch: true,
+      width: 150,
+      align: 'center'
     },
     {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
+      width: 230,
+      align: 'center',
       render: (_, record) => (
         <Space split={<Divider type="vertical" />}>
           <Typography.Link
@@ -149,7 +164,7 @@ const AdminTableInfoPage: React.FC<unknown> = () => {
           )}
           <Popconfirm
             title="您确定要删除么？"
-            onConfirm={() => doDelete(record)}
+            onConfirm={() => { doDelete(record); actionRef.current?.reload(); }}
             okText="确认"
             cancelText="取消"
           >
@@ -200,14 +215,14 @@ const AdminTableInfoPage: React.FC<unknown> = () => {
       <CreateModal
         modalVisible={createModalVisible}
         columns={columns}
-        onSubmit={() => {}}
+        onSubmit={() => { setCreateModalVisible(false); actionRef.current?.reload(); }}
         onCancel={() => setCreateModalVisible(false)}
       />
       <UpdateModal
         modalVisible={updateModalVisible}
         oldData={updateData}
         columns={columns}
-        onSubmit={() => {}}
+        onSubmit={() => { setUpdateModalVisible(false); actionRef.current?.reload(); }}
         onCancel={() => setUpdateModalVisible(false)}
       />
     </PageContainer>

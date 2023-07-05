@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useModel } from '@umijs/max'
 import { PaginationConfig } from 'antd/es/pagination'
 import copy from 'copy-to-clipboard'
 import { message, List, Button, Descriptions, Space, Tag, Divider, Typography, Popconfirm } from 'antd'
-import ReportModal from '../ReportModal'
 import { deleteTableInfo, generateCreateTableSql } from '@/services/tableInfoService'
 import './index.less'
 
@@ -11,6 +10,7 @@ interface Props {
   pagination: PaginationConfig
   loading?: boolean
   dataList: TableInfoType.TableInfo[]
+  setDataList: (dataList: TableInfoType.TableInfo[]) => void
   showTag?: boolean
   onImport?: (values: TableInfoType.TableInfo) => void
 }
@@ -20,10 +20,7 @@ interface Props {
  * @constructor
  */
 const TableInfoList: React.FC<Props> = (props) => {
-  const { dataList, pagination, loading, showTag = true, onImport } = props
-  const [reportModalVisible, setReportModalVisible] = useState(false)
-  const [reportedId, setReportedId] = useState(0)
-
+  const { dataList, setDataList, pagination, loading, showTag = true, onImport } = props
   const { initialState } = useModel('@@initialState')
   const loginUser = initialState?.loginUser
 
@@ -115,20 +112,14 @@ const TableInfoList: React.FC<Props> = (props) => {
                 >
                   复制语句
                 </Button>
-                <Button
-                  type='text'
-                  onClick={() => {
-                    setReportedId(item.id)
-                    setReportModalVisible(true)
-                  }}
-                >
-                  举报
-                </Button>
-                {loginUser && loginUser.id === item.userId && (
+                {loginUser && loginUser.id === item.userId && showTag && (
                   <Popconfirm
                     title='你确定要删除么？'
                     onConfirm={() => {
                       doDelete(item.id)
+                      const copyDataList = JSON.parse(JSON.stringify(dataList));
+                      copyDataList.splice(index, 1)
+                      setDataList(copyDataList)
                     }}
                   >
                     <Button type='text' danger>删除</Button>
@@ -137,13 +128,6 @@ const TableInfoList: React.FC<Props> = (props) => {
               </Space>
             </List.Item>
           )
-        }}
-      />
-      <ReportModal
-        visible={reportModalVisible}
-        reportedId={reportedId}
-        onClose={() => {
-          setReportModalVisible(false)
         }}
       />
     </div>

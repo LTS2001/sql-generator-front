@@ -4,10 +4,10 @@ import { request } from '@umijs/max';
  * 分页获取用户列表
  * @param params
  */
-export async function listUserByPage(params: UserType.UserQueryRequest) {
+export async function listUserByPage(data: UserType.UserQueryRequest) {
   return request<BaseResponse<PageInfo<UserType.UserVO[]>>>('/user/list/page', {
-    method: 'GET',
-    params,
+    method: 'POST',
+    data,
   });
 }
 

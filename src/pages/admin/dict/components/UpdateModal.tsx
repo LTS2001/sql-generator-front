@@ -35,11 +35,18 @@ const handleUpdate = async (fields: DictType.Dict) => {
  */
 const UpdateModal: React.FC<PropsWithChildren<UpdateModalProps>> = (props) => {
   const { oldData, columns, modalVisible, onCancel, onSubmit } = props
+  let fulfillData = {}
+  if (oldData.content) {
+    // 处理 oldData 中的 content 内容
+    const fulfillContent = JSON.parse(oldData.content).join('，')
+    fulfillData = { ...oldData, content: fulfillContent }
+  }
+
   return (
     <Modal
       destroyOnClose
       title='更新'
-      visible={modalVisible}
+      open={modalVisible}
       onCancel={onCancel}
       footer={null}
     >
@@ -51,7 +58,7 @@ const UpdateModal: React.FC<PropsWithChildren<UpdateModalProps>> = (props) => {
         rowKey='id'
         type='form'
         form={{
-          initialValues: oldData
+          initialValues: fulfillData
         }}
         columns={columns}
       />

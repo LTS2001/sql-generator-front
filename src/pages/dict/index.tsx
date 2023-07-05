@@ -48,13 +48,6 @@ const IndexPage: React.FC = () => {
         title={
           <>
             使用现成的词库来生成特定数据，或用作研究数据集！
-            <a
-              href="https://www.bilibili.com/video/BV1eP411N7B7/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              查看视频教程
-            </a>
           </>
         }
         extra={
@@ -69,6 +62,7 @@ const IndexPage: React.FC = () => {
         }
       >
         <Row gutter={[12, 12]}>
+          {/* 公开词库 */}
           <Col
             xs={24}
             xl={layout === 'half' ? 12 : 24}
@@ -76,6 +70,7 @@ const IndexPage: React.FC = () => {
           >
             <DictCard title="公开词库" showTag={false} />
           </Col>
+          {/* 个人词库 */}
           <Col
             xs={24}
             xl={layout === 'half' ? 12 : 24}

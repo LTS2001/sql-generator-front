@@ -24,7 +24,7 @@ const handleUpdate = async (fields: FieldInfoType.FieldInfo) => {
     return true
   } catch (error: any) {
     hide()
-    message.error('更新失败请重试！')
+    message.error(error.message)
     return false
   }
 }

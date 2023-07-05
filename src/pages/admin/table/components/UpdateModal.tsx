@@ -23,9 +23,9 @@ const handleUpdate = async (fields: TableInfoType.TableInfo) => {
 
     message.success('更新成功');
     return true;
-  } catch (error) {
+  } catch (error: any) {
     hide();
-    message.error('更新失败请重试！');
+    message.error(error.message);
     return false;
   }
 };
