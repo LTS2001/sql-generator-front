@@ -2,7 +2,6 @@
 
 > 快速生成 SQL 和模拟数据，大幅提高开发测试的效率！
 >
-> 本项目模仿程序员鱼皮的 SQLFather，仅作为学习使用。
 
 前端代码仓库：https://gitee.com/litaosheng/sql-generator-front
 
@@ -51,6 +50,28 @@
 - 词库管理
 - 表信息管理
 - 字段信息管理
+
+# 应用场景
+
+1、通过填写可视化表单的形式，快速生成建表语句、模拟数据以及代码
+
+2、支持多种快捷导入方式。比如，智能导入，输入几个单词就可以自动生成表格以及模拟数据；支持建表SQL语句的导入，一键填写表单快速生成模拟数据；excel表格的导入，助你快速完成建表
+
+![image-20230706085837757](./README.assets/image-20230706085837757.png)
+
+![image-20230706090144928](./README.assets/image-20230706090144928.png)
+
+excel表格的导入需要按照特定的格式导入才可以导入成功，可以在`README.assets/demo.xlsx`查看格式
+
+![image-20230706090450404](./README.assets/image-20230706090450404.png)
+
+3、支持多种模拟生成数据的规则。比如，随机值、固定值、递增值、正则表达式，而且还可以基于现有的词库来生成特定范围的值
+
+![image-20230706094038621](./README.assets/image-20230706094038621.png)
+
+4、支持词库、表信息、字段信息共享。可以学习或者参考其他同学的库表设计，或者直接使用现成的库表进行一键生成或进行二次开发
+
+![image-20230706094819386](./README.assets/image-20230706094819386.png)
 
 # 技术栈
 
@@ -114,7 +135,11 @@ pnpm run dev
 
 > 1、运行 sql 目录下的 create_table.sql 建表
 >
-> 2、在 src/config/config.default.ts 文件中的 sequelize 配置项中确认 mysql 的用户名跟密码
+> 2、在 src/config/config.default.ts 文件中的 sequelize 配置项中确认你的 mysql 的用户名跟密码
+>
+> 3、初始化登录用户密码 。
+>
+> ​		管理员 -> 账号：admin 密码：adminyyds			普通用户 -> 账号：user 密码：useryyds
 
 安装依赖：
 
@@ -136,7 +161,7 @@ npm run dev
 
 架构设计图如下：
 
-![](./README.assets/SQLGenerator.png)!](./../../browser/chrome/SQLGenerator.png)
+![](./README.assets/SQLGenerator.png)
 
 核心模块可以分为一下几个：
 
@@ -212,10 +237,6 @@ npm run dev
 ## 共享服务
 
 共享服务包括词库、表信息、字段信息共享，本质就是对这些实体进行CRUD
-
-# 学习笔记
-
-我的学习笔记放置在`StudyNote.md`下，感兴趣的小伙伴可以前去查看。
 
 
 
