@@ -8,7 +8,7 @@ import RightContent from '@/components/GlobalHeader/RightContent'
 import GlobalFooter from "@/components/GlobalFooter"
 
 import './global.less'
-
+import logo from './favicon.ico'
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
 // 更多信息见文档：https://umijs.org/docs/api/runtime-config#getinitialstate
@@ -29,8 +29,8 @@ export async function getInitialState(): Promise<InitialState> {
  */
 export const layout: RunTimeLayoutConfig = () => {
   return {
-    title: 'SQLGenerator',
-    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
+    title: 'SQL生成器',
+    logo,
     menu: {
       locale: true,
     },

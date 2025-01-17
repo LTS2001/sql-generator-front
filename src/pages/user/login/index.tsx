@@ -4,7 +4,7 @@ import { message } from "antd"
 import { LoginForm, ProFormText } from '@ant-design/pro-components'
 import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import { userLogin } from '@/services/userService'
-
+import logo from '@/favicon.ico'
 /**
  * 用户登录界面
  */
@@ -40,8 +40,8 @@ export default () => {
       }}
     >
       <LoginForm<UserType.UserLoginRequest>
-        logo='https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg'
-        title='SQLGenerator'
+        logo={logo}
+        title='SQL生成器'
         subTitle='快速生成代码和数据'
         onFinish={async (formData) => {
           await doUserLogin(formData)

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, message, Empty, Space, Input } from 'antd'
-import { useModel } from '@/.umi/plugin-model'
 import { listDictByPage } from '@/services/dictService'
 // @ts-ignore
-import { Link } from '@umijs/max'
+import { Link, useModel } from '@umijs/max'
 import DictList from '../DictList'
 
 const DEFAULT_PAGE_SIZE = 5

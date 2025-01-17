@@ -1,5 +1,4 @@
-import { Navigate, Outlet } from "@/.umi/exports"
-import { useAccess } from "@/.umi/plugin-access"
+import { Navigate, Outlet, useAccess } from "@umijs/max"
 import { message } from "antd"
 
 /**
