@@ -48,7 +48,7 @@ const isDev = process.env.NODE_ENV === 'development'
  * https://umijs.org/docs/max/request
  */
 export const request: RequestConfig = {
-  baseURL: isDev ? 'http://127.0.0.1:7001' : '你的线上地址',
+  baseURL: isDev ? 'http://127.0.0.1:7001' : 'https://litaosheng.top:6001',
   timeout: 5000,
   withCredentials: true,
   // axios 的其他配置选项
