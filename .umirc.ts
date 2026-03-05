@@ -22,5 +22,6 @@ export default defineConfig({
       { languages: ['sql', 'json', 'java', 'typescript'] }
     ]);
     return memo;
-  }
+  },
+  esbuildMinifyIIFE: true,
 });
